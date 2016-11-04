@@ -32,6 +32,7 @@
     "node": ">=0.10.0"
   },
   "dependencies": {
+    "gulp-dotenv": "^0.2.1",
     "jasmine-core": "^2.5.2",
     "karma": "^1.3.0",
     "karma-jasmine": "^1.0.2",

@@ -8,6 +8,17 @@ var rimraf = require('rimraf');
 var wiredep = require('wiredep').stream;
 var runSequence = require('run-sequence');
 
+var dotenv = require('gulp-dotenv');
+var rename = require('gulp-rename');
+ 
+gulp.task('dotenv', function () {
+  return gulp.src('.env')
+    .pipe(dotenv())
+    .pipe(rename('env.json'))
+    .pipe(gulp.dest('app'))
+    .pipe(gulp.dest('dist'));
+});
+
 //app directory structor
 var yeoman = {
   app: require('./bower.json').appPath || 'app',
@@ -222,7 +233,7 @@ gulp.task('copy:favicon', function () {
 });
 
 gulp.task('build', ['clean:dist', 'bower'], function () {
-  runSequence(['images', 'copy:extras', 'copy:fonts', 'copy:favicon', 'client:build']);
+  runSequence(['dotenv', 'images', 'copy:extras', 'copy:fonts', 'copy:favicon', 'client:build']);
 });
 
 gulp.task('default', ['build']);
