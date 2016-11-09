@@ -25,7 +25,13 @@ describe('Service: marvelApi', function () {
     httpBackend.flush();
   });
 
-  // it('should have a method that gets the credentials needed for the api', function () {
-    // TODO
-  // });
+  it('should have a method that returns the credentials needed for the api', function () {
+    var publicKey = 'foo';
+    var privateKey = 'bar';
+    var credentials = marvelApi.getCredentials(publicKey, privateKey);
+    expect(credentials.publicKey === 'foo').toBe(true);
+    expect(credentials.privateKey === 'bar').toBe(true);
+    expect(credentials.timeStamp > 1 ).toBe(true);
+    expect(credentials.hash.length > 1 ).toBe(true);
+  });
 });
