@@ -26,19 +26,18 @@ angular.module('marvelPullListApp')
         var timeStamp = Date.now();
         var hash = md5.createHash(publicKey + privateKey + timeStamp);
         return {publicKey: publicKey, privateKey : privateKey, timeStamp : timeStamp, hash: hash}
+      },
+      getThisWeeksComics : function(publicKey, hash, timeStamp) {
+        var queryParams = '?dateDescriptor=thisWeek&format=comic&limit=100&noVariants=true' + '&apikey=' + publicKey + '&hash=' + hash + '&ts=' + timeStamp;        
+        return $http({
+            url: 'http://gateway.marvel.com/v1/public/comics' + queryParams, 
+            method: "GET"
+          }).success(function(data){
+            return data;
+          })
+          .error(function(error){
+            return error;
+          });
       }
-      // getThisWeeksComics : function(publicKey, privateKey, timeStamp){
-      //   var hash = md5.createHash(publicKey + privateKey + timeStamp);
-      //   var queryParams = '?dateDescriptor=thisWeek&format=comic&limit=100&noVariants=true' + '&apikey=' + publicKey + '&hash=' + hash + '&ts=' + timeStamp;        
-      //   return $http({
-      //       url: 'http://gateway.marvel.com/v1/public/comics' + queryParams, 
-      //       method: "GET"
-      //     }).success(function(data){
-      //       return data;
-      //     })
-      //     .error(function(error){
-      //       return error;
-      //     });
-      // }
     }
   }]);

@@ -34,4 +34,19 @@ describe('Service: marvelApi', function () {
     expect(credentials.timeStamp > 1 ).toBe(true);
     expect(credentials.hash.length > 1 ).toBe(true);
   });
+
+  it('should have a method that gets this weeks comics', function () {
+    var credentials = marvelApi.getCredentials('foo', 'bar');
+    var queryParams = '?dateDescriptor=thisWeek&format=comic&limit=100&noVariants=true' + '&apikey=' + credentials.publicKey + '&hash=' + credentials.hash + '&ts=' + credentials.timeStamp;
+    
+    httpBackend
+      .when('GET', 'http://gateway.marvel.com/v1/public/comics' + queryParams)
+      .respond(200, { foo: 'bar' });
+
+    marvelApi.getThisWeeksComics(credentials.publicKey, credentials.hash, credentials.timeStamp).then(function(response){
+      expect(response.data).toEqual({ foo: 'bar' });
+    });
+    
+    httpBackend.flush();
+  });
 });
