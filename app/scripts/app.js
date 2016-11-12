@@ -25,6 +25,11 @@ angular
         controller: 'MainCtrl',
         controllerAs: 'main'
       })
+      .when('/NewComics', {
+        templateUrl: 'views/newcomics.html',
+        controller: 'NewcomicsCtrl',
+        controllerAs: 'newcomics'
+      })
       .otherwise({
         redirectTo: '/'
       });
