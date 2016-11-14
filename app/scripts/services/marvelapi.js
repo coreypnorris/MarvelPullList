@@ -25,12 +25,13 @@ angular.module('marvelPullListApp')
       getCredentials : function(publicKey, privateKey) {
         var timeStamp = Date.now();
         var hash = md5.createHash(timeStamp + privateKey + publicKey);
-        return {publicKey: publicKey, privateKey : privateKey, timeStamp : timeStamp, hash: hash}
+        return {publicKey: publicKey, privateKey : privateKey, timeStamp : timeStamp, hash: hash};
       },
       getThisWeeksComics : function(publicKey, hash, timeStamp) {
         var queryParams = '?dateDescriptor=thisWeek&format=comic&limit=100&noVariants=true' + '&apikey=' + publicKey + '&hash=' + hash + '&ts=' + timeStamp;
         return $http({
-            url: 'https://gateway.marvel.com/v1/public/comics' + queryParams, 
+            url: 'https://gateway.marvel.com/v1/public/comics' + queryParams,
+            cache: true,
             method: "GET"
           }).success(function(data){
             return data;
@@ -39,5 +40,5 @@ angular.module('marvelPullListApp')
             return error;
           });
       }
-    }
+    };
   }]);

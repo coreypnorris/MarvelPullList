@@ -40,7 +40,7 @@ describe('Service: marvelApi', function () {
     var queryParams = '?dateDescriptor=thisWeek&format=comic&limit=100&noVariants=true' + '&apikey=' + credentials.publicKey + '&hash=' + credentials.hash + '&ts=' + credentials.timeStamp;
     
     httpBackend
-      .when('GET', 'http://gateway.marvel.com/v1/public/comics' + queryParams)
+      .when('GET', 'https://gateway.marvel.com/v1/public/comics' + queryParams)
       .respond(200, { foo: 'bar' });
 
     marvelApi.getThisWeeksComics(credentials.publicKey, credentials.hash, credentials.timeStamp).then(function(response){

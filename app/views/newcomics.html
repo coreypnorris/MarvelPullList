@@ -1,1 +1,8 @@
-<p>This is the newcomics view.</p>
+<div ng-repeat="comic in newComics" ng-controller="NewcomicsCtrl">
+  <div class="panel panel-default">
+    <div class="panel-heading">{{comic.title}}</div>
+    <div class="panel-body">
+      <img ng-src="{{comic.images[0].path + '.' + comic.images[0].extension}}">
+    </div>
+  </div>
+</div>

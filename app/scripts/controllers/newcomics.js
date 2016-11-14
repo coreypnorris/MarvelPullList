@@ -9,10 +9,6 @@
  */
 angular.module('marvelPullListApp')
   .controller('NewcomicsCtrl', ['$scope', 'marvelApi', function ($scope, marvelApi) {
-    $scope.getMyCtrlScope = function() {
-      return $scope;   
-    };
-
     var apiKeys, credentials;
     marvelApi.getApiKeys().then(function(response){
       apiKeys = response.data;
@@ -20,7 +16,6 @@ angular.module('marvelPullListApp')
       marvelApi.getThisWeeksComics(credentials.publicKey, credentials.hash, credentials.timeStamp)
         .success(function(response){
           $scope.newComics = response.data.results;
-          console.log(response.data.results);
         });
     });
   }]);
